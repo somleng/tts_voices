@@ -1,5 +1,7 @@
 module TTSVoices
   class Voice
+    DEFAULT_IDENTIFIER = "Basic.Kal".freeze
+
     class << self
       def all
         data_store.load(:all)
@@ -15,6 +17,10 @@ module TTSVoices
 
       def find(identifier)
         all.find { |voice| voice.identifier == identifier }
+      end
+
+      def default
+        find(DEFAULT_IDENTIFIER)
       end
 
       private
