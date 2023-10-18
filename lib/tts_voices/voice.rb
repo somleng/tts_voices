@@ -33,6 +33,10 @@ module TTSVoices
       @provider = provider
     end
 
+    def to_s
+      "#{identifier} (#{gender}, #{language})"
+    end
+
     def identifier
       [provider, name].join(".")
     end
