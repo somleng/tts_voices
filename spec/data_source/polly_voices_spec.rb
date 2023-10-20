@@ -13,14 +13,14 @@ module TTSVoices
           name: "Vitoria",
           language: "pt-BR",
           provider: "Polly",
-          engine: "Neural"
+          engine: "Standard"
         )
         expect(voices[1]).to have_attributes(
           gender: "Female",
           name: "Vitoria",
           language: "pt-BR",
           provider: "Polly",
-          engine: "Standard"
+          engine: "Neural"
         )
       end
 

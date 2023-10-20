@@ -15,7 +15,7 @@ module TTSVoices
 
       def load_data
         voices.each_with_object([]) do |voice, result|
-          voice.supported_engines.each do |engine|
+          voice.supported_engines.sort.reverse.each do |engine|
             result << Voice.new(
               provider: "Polly",
               name: voice.id,
