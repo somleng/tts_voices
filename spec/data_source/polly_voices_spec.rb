@@ -7,12 +7,20 @@ module TTSVoices
         fake_client = build_fake_polly_client
         voices = PollyVoices.new(aws_client: fake_client).load_data
 
-        expect(voices.size).to eq(1)
-        expect(voices.first).to have_attributes(
+        expect(voices.size).to eq(2)
+        expect(voices[0]).to have_attributes(
           gender: "Female",
-          name: "Isabelle",
-          language: "fr-BE",
-          provider: "Polly"
+          name: "Vitoria",
+          language: "pt-BR",
+          provider: "Polly",
+          engine: "Neural"
+        )
+        expect(voices[1]).to have_attributes(
+          gender: "Female",
+          name: "Vitoria",
+          language: "pt-BR",
+          provider: "Polly",
+          engine: "Standard"
         )
       end
 
@@ -20,7 +28,12 @@ module TTSVoices
         Aws::Polly::Client.new(
           stub_responses: {
             describe_voices: {
-              voices: [{ gender: "Female", id: "Isabelle", language_code: "fr-BE" }]
+              voices: [
+                {
+                  gender: "Female", id: "Vitoria", language_code: "pt-BR",
+                  supported_engines: %w[neural standard]
+                }
+              ]
             }
           }
         )

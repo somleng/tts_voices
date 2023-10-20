@@ -16,7 +16,8 @@ module TTSVoices
             provider: "Basic",
             name: voice,
             language: attributes.fetch("language"),
-            gender: attributes.fetch("gender")
+            gender: attributes.fetch("gender"),
+            engine: "Standard"
           )
         end
       end

@@ -15,12 +15,15 @@ module TTSVoices
 
       def load_data
         voices.each_with_object([]) do |voice, result|
-          result << Voice.new(
-            provider: "Polly",
-            name: voice.id,
-            language: voice.language_code,
-            gender: voice.gender
-          )
+          voice.supported_engines.each do |engine|
+            result << Voice.new(
+              provider: "Polly",
+              name: voice.id,
+              language: voice.language_code,
+              gender: voice.gender,
+              engine: engine.capitalize
+            )
+          end
         end
       end
 

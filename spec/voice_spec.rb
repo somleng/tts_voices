@@ -19,5 +19,11 @@ module TTSVoices
 
       expect(voice.to_s).to eq("Basic.Kal (Male, en-US)")
     end
+
+    it "returns a string representation for Neural voices" do
+      voice = Voice.find("Polly.Vitoria-Neural")
+
+      expect(voice.to_s).to eq("Polly.Vitoria-Neural (Female, pt-BR)")
+    end
   end
 end
