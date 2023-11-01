@@ -1,6 +1,6 @@
 # TTSVoices
 
-[![Ruby](https://github.com/somleng/tts_voices/actions/workflows/main.yml/badge.svg)](https://github.com/somleng/tts_voices/actions/workflows/main.yml)
+[![Build](https://github.com/somleng/tts_voices/actions/workflows/main.yml/badge.svg)](https://github.com/somleng/tts_voices/actions/workflows/main.yml)
 
 A collection of TTS voices used in Somleng
 
