@@ -1,6 +1,7 @@
 module TTSVoices
   module DataSource
     class BasicVoices
+      PROVIDER = "Basic".freeze
       DATA = {
         "Kal" => { "language" => "en-US", "gender" => "Male" },
         "Slt" => { "language" => "en-US", "gender" => "Female" }
@@ -13,7 +14,8 @@ module TTSVoices
       def load_data
         DATA.each_with_object([]) do |(voice, attributes), result|
           result << Voice.new(
-            provider: "Basic",
+            provider: PROVIDER,
+            identifier: "#{PROVIDER}.#{voice}",
             name: voice,
             language: attributes.fetch("language"),
             gender: attributes.fetch("gender"),

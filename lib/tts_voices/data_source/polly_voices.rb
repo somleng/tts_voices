@@ -3,6 +3,8 @@ require "aws-sdk-polly"
 module TTSVoices
   module DataSource
     class PollyVoices
+      PROVIDER = "Polly".freeze
+
       def self.load_data
         new.load_data
       end
@@ -16,12 +18,15 @@ module TTSVoices
       def load_data
         result = voices.each_with_object([]) do |voice, result|
           voice.supported_engines.each do |engine|
+            engine_display_name = engine.capitalize
+
             result << Voice.new(
-              provider: "Polly",
+              provider: PROVIDER,
               name: voice.id,
               language: voice.language_code,
               gender: voice.gender,
-              engine: engine.capitalize
+              engine: engine_display_name,
+              identifier: "#{PROVIDER}.#{voice.id}#{"-#{engine_display_name}" unless engine == "standard"}"
             )
           end
         end

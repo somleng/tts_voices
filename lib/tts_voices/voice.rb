@@ -30,22 +30,19 @@ module TTSVoices
       end
     end
 
-    attr_reader :name, :gender, :language, :provider, :engine
+    attr_reader :name, :gender, :language, :provider, :engine, :identifier
 
-    def initialize(name:, gender:, language:, provider:, engine:)
+    def initialize(identifier:, name:, gender:, language:, provider:, engine:)
       @name = name
       @gender = gender
       @language = language
       @provider = provider
       @engine = engine
+      @identifier = identifier
     end
 
     def to_s
       "#{identifier} (#{gender}, #{language})"
-    end
-
-    def identifier
-      "#{provider}.#{name}#{"-#{engine}" unless engine == "Standard"}"
     end
   end
 end
