@@ -6,6 +6,8 @@ module TTSVoices
         DataSource::AllVoices.load_data
       when :basic
         DataSource::BasicVoices.load_data
+      when :azure
+        DataSource::AzureVoices.load_data
       when :polly
         DataSource::PollyVoices.load_data
       end

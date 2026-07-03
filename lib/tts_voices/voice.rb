@@ -11,6 +11,10 @@ module TTSVoices
         data_store.load(:basic)
       end
 
+      def azure
+        data_store.load(:azure)
+      end
+
       def polly
         data_store.load(:polly)
       end
