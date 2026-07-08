@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "bundler/setup"
+Bundler.require(:default, :test)
+
 require "tts_voices"
 
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }

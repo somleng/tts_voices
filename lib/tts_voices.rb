@@ -13,7 +13,7 @@ module TTSVoices
 end
 
 require_relative "tts_voices/version"
+require_relative "tts_voices/voice"
 require_relative "tts_voices/store_cache"
 require_relative "tts_voices/data_store"
 require_relative "tts_voices/data_source"
-require_relative "tts_voices/voice"

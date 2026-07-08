@@ -9,12 +9,18 @@ module TTSVoices
 
       class Error < StandardError; end
 
+      class Voice < TTSVoices::Voice
+        def to_s
+          "#{PROVIDER}.#{name}#{"-#{engine}" unless engine == "Standard"} (#{gender}, #{language})"
+        end
+      end
+
       class Client
         attr_reader :region, :key, :http_client
 
         def initialize(options = {})
-          @region = options.fetch(:region) { ENV.fetch("AZURE_SPEECH_REGION") }
-          @key = options.fetch(:key) { ENV.fetch("AZURE_SPEECH_KEY") }
+          @region = options.fetch(:region) { ENV.fetch("AZURE_SPEECH_REGION", "southeastasia") }
+          @key = options.fetch(:key) { ENV["AZURE_SPEECH_KEY"] }
           @http_client = options.fetch(:http_client) { Net::HTTP }
         end
 
