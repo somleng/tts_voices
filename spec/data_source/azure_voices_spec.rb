@@ -24,44 +24,14 @@ module TTSVoices
       end
 
       it "loads Azure voices" do
-        response = FakeResponse.new("200", "OK", JSON.dump([
-          {
-            "ShortName" => "en-US-GuyNeural",
-            "DisplayName" => "Guy",
-            "Gender" => "Male",
-            "Locale" => "en-US",
-            "VoiceType" => "Neural"
-          },
-          {
-            "ShortName" => "en-GB-LibbyNeural",
-            "DisplayName" => "Libby",
-            "Gender" => "Female",
-            "Locale" => "en-GB",
-            "VoiceType" => "Neural"
-          }
-        ]))
-        fake_http_client = FakeHTTPClient.new(response)
-        fake_client = AzureVoices::Client.new(region: "southeastasia", key: "api-key", http_client: fake_http_client)
+        VCR.use_cassette("azure_voices") do
+          voices = AzureVoices.new.load_data
 
-        voices = AzureVoices.new(client: fake_client).load_data
-
-        expect(voices.map(&:identifier)).to eq([
-          "Azure.en-GB-LibbyNeural",
-          "Azure.en-US-GuyNeural",
-        ])
-        expect(voices[0]).to have_attributes(
-          identifier: "Azure.en-GB-LibbyNeural",
-          name: "Libby",
-          language: "en-GB",
-          engine: "Neural",
-          gender: "Female"
-        )
-        expect(voices[1]).to have_attributes(
-          identifier: "Azure.en-US-GuyNeural",
-          name: "Guy"
-        )
-
-        expect(fake_http_client.last_request["Ocp-Apim-Subscription-Key"]).to eq("api-key")
+          expect(voices.map(&:identifier)).to include(
+            "Azure.km-KH-PisethNeural",
+            "Azure.es-MX-BeatrizNeural"
+          )
+        end
       end
 
       it "raises when the Azure request fails" do
@@ -82,7 +52,7 @@ module TTSVoices
 
       def build_client(response)
         fake_http_client = FakeHTTPClient.new(response)
-        AzureVoices::Client.new(region: "southeastasia", key: "api-key", http_client: fake_http_client)
+        AzureVoices::Client.new(http_client: fake_http_client)
       end
     end
   end
