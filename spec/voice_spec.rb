@@ -8,6 +8,18 @@ module TTSVoices
       end
     end
 
+    it "returns all voices" do
+      voices = Voice.all
+
+      expect(voices.map(&:provider).uniq).to eq(%w[Basic Polly Azure])
+    end
+
+    it "returns basic voices" do
+      voices = Voice.basic
+
+      expect(voices.map(&:provider).uniq).to eq(%w[Basic])
+    end
+
     it "returns a default voice" do
       voice = Voice.default
 
@@ -17,7 +29,6 @@ module TTSVoices
     it "finds by the identifier" do
       basic_voice = Voice.find("Basic.Kal")
       azure_voice = Voice.find("Azure.af-ZA-WillemNeural")
-
 
       expect(basic_voice.identifier).to eq("Basic.Kal")
       expect(azure_voice.identifier).to eq("Azure.af-ZA-WillemNeural")

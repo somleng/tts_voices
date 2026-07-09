@@ -11,6 +11,10 @@ module TTSVoices
         new.load_data
       end
 
+      def self.provider
+        PROVIDER
+      end
+
       def load_data
         DATA.each_with_object([]) do |(voice, attributes), result|
           result << Voice.new(

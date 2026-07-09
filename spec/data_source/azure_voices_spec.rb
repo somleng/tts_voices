@@ -25,12 +25,28 @@ module TTSVoices
 
       it "loads Azure voices" do
         VCR.use_cassette("azure_voices") do
-          voices = AzureVoices.new.load_data
+          voices = AzureVoices.load_data
 
           expect(voices.map(&:identifier)).to include(
             "Azure.km-KH-PisethNeural",
             "Azure.es-MX-BeatrizNeural"
           )
+        end
+      end
+
+      it "configures with options" do
+        allow(TTSVoices.configuration).to receive(:azure_options).and_return({
+          region: "southeastasia",
+          key: "1234567890"
+        })
+
+        VCR.use_cassette("azure_voices") do
+          AzureVoices.load_data
+
+          expect(WebMock).to have_requested(
+            :get,
+            "https://southeastasia.tts.speech.microsoft.com/cognitiveservices/voices/list"
+          ).with(headers: { "Ocp-Apim-Subscription-Key" => "1234567890" })
         end
       end
 

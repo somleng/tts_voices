@@ -44,11 +44,15 @@ module TTSVoices
       end
 
       def self.load_data
-        new.load_data
+        new(TTSVoices.configuration.azure_options).load_data
       end
 
-      def initialize(client: default_client)
-        @client = client
+      def self.provider
+        PROVIDER
+      end
+
+      def initialize(options = {})
+        @client = options.fetch(:client) { Client.new(options) }
       end
 
       def load_data
@@ -60,13 +64,7 @@ module TTSVoices
 
       private
 
-      def default_client
-        Client.new
-      end
-
-      def client
-        @client ||= default_client
-      end
+      attr_reader :client
 
       def build_voice(attributes)
         Voice.new(

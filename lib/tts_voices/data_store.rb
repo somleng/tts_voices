@@ -3,7 +3,13 @@ module TTSVoices
     def load(type)
       case type
       when :all
-        DataSource::AllVoices.load_data
+        [
+          DataSource::BasicVoices,
+          DataSource::PollyVoices,
+          DataSource::AzureVoices
+        ].select do |voice|
+          TTSVoices.configuration.voices.empty? || TTSVoices.configuration.voices.include?(voice.provider)
+        end.flat_map(&:load_data)
       when :basic
         DataSource::BasicVoices.load_data
       when :azure
