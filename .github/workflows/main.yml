@@ -9,6 +9,9 @@ on:
 
 jobs:
   build:
+    env:
+      CI: true
+
     runs-on: ubuntu-latest
 
     steps:
@@ -20,3 +23,8 @@ jobs:
 
     - name: Run the default task
       run: bundle exec rake
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v7
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

@@ -9,5 +9,7 @@ gem "pry"
 gem "rake"
 gem "rspec"
 gem "rubocop"
+gem "simplecov", require: false
+gem "simplecov-cobertura", require: false
 gem "vcr"
 gem "webmock"
