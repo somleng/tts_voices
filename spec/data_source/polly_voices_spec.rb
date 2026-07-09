@@ -11,6 +11,7 @@ module TTSVoices
 
         expect(voices[0]).to have_attributes(
           gender: "Female",
+          identifier: "Polly.Ivy",
           name: "Ivy",
           language: "en-US",
           provider: "Polly",
@@ -18,6 +19,7 @@ module TTSVoices
         )
         expect(voices[1]).to have_attributes(
           gender: "Female",
+          identifier: "Polly.Ivy-Neural",
           name: "Ivy",
           language: "en-US",
           provider: "Polly",
@@ -25,6 +27,7 @@ module TTSVoices
         )
         expect(voices[2]).to have_attributes(
           gender: "Female",
+          identifier: "Polly.Danielle-Neural",
           name: "Danielle",
           language: "en-US",
           provider: "Polly",

@@ -1,8 +1,21 @@
 # frozen_string_literal: true
 
+require "bundler/setup"
+Bundler.require(:default, :test)
+
 require "tts_voices"
 
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
+if ENV.key?("CI")
+  require "simplecov"
+  SimpleCov.start do
+    enable_coverage_for_eval
+  end
+
+  require "simplecov-cobertura"
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+end
+
+Dir[File.dirname(__FILE__) + "/support/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

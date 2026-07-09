@@ -1,6 +1,7 @@
 # TTSVoices
 
 [![Build](https://github.com/somleng/tts_voices/actions/workflows/main.yml/badge.svg)](https://github.com/somleng/tts_voices/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/somleng/tts_voices/graph/badge.svg?token=KZhRZhAW4E)](https://codecov.io/gh/somleng/tts_voices)
 
 A collection of TTS voices used in Somleng
 
